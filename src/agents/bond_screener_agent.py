@@ -2,7 +2,7 @@ from langchain.agents import Tool
 from langchain.chains import LLMChain
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
-from utils.tidb_connector import execute_query
+from src.utils.tidb_connector import execute_query
 import json
 from dotenv import load_dotenv
 import os

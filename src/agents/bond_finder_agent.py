@@ -66,7 +66,7 @@ class BondFinderAgent:
         from langchain_core.runnables import RunnableSequence
         self.chain = RunnableSequence(self.prompt, self.llm)
 
-    def process_query(self, query, bond_data, limit=5):
+    def process_query(self, query, bond_data, limit=4):
         """Process a bond finder query and return recommendations.
         
         Args:
@@ -83,7 +83,7 @@ class BondFinderAgent:
             
             # Ensure limit is reasonable
             if not limit or limit > 10:
-                limit = 5
+                limit = 4
             
             # Get recommendations from LLM with limit
             response = self.chain.invoke({

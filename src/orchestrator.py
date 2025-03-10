@@ -4,10 +4,10 @@ from langchain.prompts import PromptTemplate
 import json
 import os
 from dotenv import load_dotenv
-from agents.bond_directory_agent import BondDirectoryAgent
-from agents.bond_screener_agent import BondScreenerAgent
-from agents.bond_yield_calculator_agent import BondYieldCalculatorAgent
-from agents.bond_finder_agent import BondFinderAgent
+from src.agents.bond_directory_agent import BondDirectoryAgent
+from src.agents.bond_screener_agent import BondScreenerAgent
+from src.agents.bond_yield_calculator_agent import BondYieldCalculatorAgent
+from src.agents.bond_finder_agent import BondFinderAgent
 
 # Load environment variables
 load_dotenv()
@@ -173,6 +173,9 @@ Output the JSON plan only, nothing else.
         Format your response using Markdown for better readability.
         Include all relevant information from the agent results, but organize it in a coherent way.
         Focus on providing actionable insights and clear explanations.
+
+        MOST IMPORTANT:
+        Strictly take care of the decimels and dates in the response and send them as NORMALISED strings so that they can be serialised withtout issues else you get penalty.
         """
         
         # Use the LLM to compile the results

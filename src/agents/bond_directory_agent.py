@@ -2,7 +2,7 @@ from langchain.agents import Tool
 from langchain.chains import LLMChain
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
-from utils.tidb_connector import execute_query
+from src.utils.tidb_connector import execute_query
 import json
 from dotenv import load_dotenv
 import os
@@ -106,7 +106,7 @@ class BondDirectoryAgent:
         - table: The table to query next
         - columns: Array of column names to retrieve in the second query
         - filters: How to filter the second query (you can reference fields from the first query result)
-        - limit: Maximum number of results for the second query ( always under 10 )
+        - limit: Maximum number of results for the second query ( always under 5 )
 
         
         Example 1 - Simple bond lookup:
@@ -254,7 +254,7 @@ class BondDirectoryAgent:
             
             # Ensure limit is applied
             if not limit or limit > 100:
-                limit = 10
+                limit = 5
             
             # Build column list for SQL with comprehensive mappings
             column_mapping = {
@@ -321,11 +321,13 @@ class BondDirectoryAgent:
             for key, value in filters.items():
                 # ISIN and company name filters
                 if key == "isin":
-                    conditions.append("isin = %s")
-                    params.append(value)
-                elif key == "company_name":
-                    conditions.append("company_name LIKE %s")
-                    params.append(f"%{value}%")
+                    if isinstance(value, list):
+                        placeholders = ', '.join(['%s'] * len(value))
+                        conditions.append(f"isin IN ({placeholders})")
+                        params.extend(value)
+                    else:
+                        conditions.append("isin = %s")
+                        params.append(value)
                 
                 # Maturity date filters
                 elif key == "maturity_after":
@@ -436,8 +438,13 @@ class BondDirectoryAgent:
             for key, value in filters.items():
                 # ISIN filter
                 if key == "isin":
-                    conditions.append("isin = %s")
-                    params.append(value)
+                    if isinstance(value, list):
+                        placeholders = ', '.join(['%s'] * len(value))
+                        conditions.append(f"isin IN ({placeholders})")
+                        params.extend(value)
+                    else:
+                        conditions.append("isin = %s")
+                        params.append(value)
                 
                 # Cash flow date filters
                 elif key == "cash_flow_date_after":
