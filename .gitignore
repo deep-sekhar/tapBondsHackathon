@@ -1,4 +1,12 @@
 venv_py39
 mongodb_data
 chroma
-data
+__pycache__
+data/bonds_details.csv
+data/cashflows.csv
+data/company_insights.csv
+
+# secrets
+isrgrootx1.pem
+.env
+node_modules

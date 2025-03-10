@@ -1,0 +1,70 @@
+Checkpoint 1: Data Setup and Basic Agent Framework
+File with functions to Load Excel files (bond_details, cashflows, company_insights) into TiDB with proper data types, fetch the data using queries.
+
+Implement basic agent structure using LangChain
+
+Define tools for each specialized agent
+
+Create a simple orchestrator for query routing
+
+============================================================
+Checkpoint 2: Individual Agent Implementation
+Implement Bond Directory Agent with ISIN lookup capabilities
+
+Implement Bond Finder Agent with yield comparison features
+
+Implement Cash Flow & Maturity Agent for payment schedule queries
+
+Implement Bond Screener Agent for company financial analysis
+
+Add error handling for edge cases (e.g., mismatched ISIN and company name)
+
+Test each agent with sample queries from documentation
+
+============================================================
+Checkpoint 3: Orchestrator Development
+Enhance query classification for accurate routing
+
+Implement context preservation between agents
+
+Create response compilation logic
+
+Add fallback mechanisms for unclassified queries
+
+Test orchestrator with complex queries requiring multiple agents
+
+============================================================
+Checkpoint 4: API and UI Development
+Create FastAPI endpoints for query handling
+
+Implement simple web interface with search functionality
+
+Add response formatting for better readability
+
+Implement error handling at API level
+
+Test end-to-end flow from UI to agents and back
+
+============================================================
+Checkpoint 5: Integration and Testing
+Integrate all components into a cohesive system
+
+Perform comprehensive testing with all example queries
+
+Optimize response times and resource usage
+
+Fix any identified bugs or issues
+
+Ensure consistent response quality across query types
+
+============================================================
+Checkpoint 6: Deployment and Documentation
+Containerize the application with Docker
+
+Set up Docker Compose for easy deployment
+
+Create documentation for system architecture and usage
+
+Prepare demo script for presentation
+
+Create slides or documentation for project showcase
